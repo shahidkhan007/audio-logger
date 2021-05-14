@@ -1,6 +1,6 @@
 import './App.css';
-import { AppBar, Toolbar } from "@material-ui/core"
 import ProjectsContainer from "./components/projectsContainer"
+import InnerProject from "./components/innerProject"
 import React from "react"
 import {
   BrowserRouter as Router,
@@ -10,7 +10,9 @@ import {
 function App() {
     return (
       <Router>
-        <Route path='/'><ProjectsContainer /></Route>
+        <Route exact path='/'><ProjectsContainer /></Route>
+        <Route path='/project/:id'><InnerProject /></Route>
+        
       </Router>
     )
 }

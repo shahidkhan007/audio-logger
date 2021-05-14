@@ -11,11 +11,32 @@ app.use(cors())
 
 app.get('/all-projects', async(req, res) => {
     await withMongoose(async(conn) => {
+
         res.json({
             projects: await projectModel.find()
         })
     })
 
+})
+
+
+app.get('/project-by-id/:id', async(req, res) => {
+    const id = req.params.id
+
+    if (!id) {
+        res.status(400).json({ 'status': 'not-retrieved', message: 'Invalid ID' })
+        return
+    }
+
+    await withMongoose(async(conn) => {
+        try {
+            const targetProject = await projectModel.findById(req.params.id)
+            res.json({ status: 'retrieved', project: targetProject })
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({ status: 'id-not-found', message: `No project with id: "${id}"` })
+        }
+    })
 })
 
 app.post('/create-project', (req, res) => {
