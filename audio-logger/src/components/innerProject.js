@@ -1,8 +1,9 @@
 import { useParams } from "react-router"
 import { get } from "axios"
 import { useEffect, useState } from "react"
-import { Accordion, AccordionDetails, AccordionSummary, List, ListItem, Typography } from "@material-ui/core"
+import { Accordion, AccordionDetails, AccordionSummary, Grid, List, ListItem, Typography } from "@material-ui/core"
 import { ExpandMore } from "@material-ui/icons"
+import AudioPlayer from "./AudioPlayer"
 
 
 export default function InnerProject() {
@@ -28,11 +29,16 @@ export default function InnerProject() {
                     <ListItem key={file}>
                         <Accordion>
                             <AccordionSummary expandIcon={<ExpandMore />}>
-                                <Typography variant="h5">Project {file}</Typography>
+                                <Typography variant="h5">File {file}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography variant="body1">This is project description</Typography>
-    
+                                <Grid container>
+                                    <Typography variant="body1" gutterBottom style={{margin: '15px'}}>This is project description</Typography>
+                                    <AudioPlayer 
+                                        style={{height: '50px', width: '100%', margin: '15px'}}
+                                        
+                                        />
+                                </Grid>
                             </AccordionDetails>
                         </Accordion>
                     </ListItem>
