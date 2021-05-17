@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Accordion, AccordionDetails, AccordionSummary, Grid, List, ListItem, Typography } from "@material-ui/core"
 import { ExpandMore } from "@material-ui/icons"
 import AudioPlayer from "./AudioPlayer"
+import AudioRecorder from "./AudioRecorder"
 
 
 export default function InnerProject() {
@@ -24,6 +25,7 @@ export default function InnerProject() {
         project &&
 
         <List>
+            <AudioRecorder />
             {
                 [1, 2, 3].map(file => (
                     <ListItem key={file}>
