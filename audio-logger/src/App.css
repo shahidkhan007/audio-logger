@@ -9,6 +9,7 @@ root {
 }
 
 .audio-react-recorder {
+    height: 50px;
     border: 1px solid #21094e;
     border-radius: 4px;
     margin-right: 10px;

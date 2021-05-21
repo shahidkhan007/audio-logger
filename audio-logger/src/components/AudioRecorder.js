@@ -1,10 +1,11 @@
 import { Accordion, AccordionDetails, AccordionSummary, Button, Grid, ListItem, Typography } from "@material-ui/core";
 import AudioReactRrecorder, { RecordState } from "audio-react-recorder"
 import { useState } from "react";
+import { post } from "axios"
 
 
 
-export default function AudioRecorder() {
+export default function AudioRecorder({pid}) {
     const [recordState, setRecordState] = useState(RecordState.NONE)
 
     const start = () => {
@@ -15,8 +16,24 @@ export default function AudioRecorder() {
         setRecordState(RecordState.STOP)
     }
 
-    const onStop = audioData => {
-        console.log("Audio Data", audioData)
+    const onStop = async(audioData) => {
+        console.log(audioData)
+        const audio = audioData.blob
+        const reader = new FileReader()
+        reader.readAsDataURL(audio)
+        reader.onloadend = () => {
+            const data = reader.result
+            const form = new FormData()
+            form.append('pid', pid)
+            form.append('audio', data)
+            post("http://localhost:8000/create-file", form, {
+                headers: {'Content-Type': 'multipart/form-data'}
+            }).then(response => {
+                console.log(response)
+            })
+        }
+ 
+
     }
 
     return (
