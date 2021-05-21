@@ -1,0 +1,3 @@
+.gitignore
+/backend/node_modules
+/audio-logger/node_modules
